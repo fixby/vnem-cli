@@ -1,0 +1,28 @@
+{
+    "name": "vnem-cli",
+    "description": "Vue2.0,NodeJS,Express,MongoDB 框架脚手架",
+    "version": "1.0.0",
+    "keywords": [
+        "Vue2.0",
+        "NodeJS",
+        "Express",
+        "MongoDB"
+    ],
+    "files": [
+        "lib",
+        "bin"
+    ],
+    "bin": {
+        "vnem": "./bin/vnem.js"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {},
+    "engine-strict": true,
+    "engines": {
+        "node": ">= 0.12"
+    },
+    "licenses": [{
+        "type": "MIT"
+    }]
+}
