@@ -1,49 +1,47 @@
 {
-  "name": "vnem-cli",
-  "description": "Vue2.0,NodeJS,Express,MongoDB 框架脚手架",
-  "version": "1.0.0",
-  "keywords": [
-    "Vue2.0",
-    "NodeJS",
-    "Express",
-    "MongoDB"
-  ],
-  "files": [
-    "lib",
-    "bin"
-  ],
-  "bin": {
-    "vnem": "./bin/vnem.js"
-  },
-  "dependencies": {
-    "child_process": "^1.0.2",
-    "colors": "^1.1.2",
-    "ejs": "^2.5.5",
-    "fs": "0.0.1-security",
-    "inquirer": "^2.0.0",
-    "mongoose": "^4.7.5",
-    "path": "^0.12.7"
-  },
-  "devDependencies": {},
-  "scripts": {},
-  "engine-strict": true,
-  "engines": {
-    "node": ">= 0.12"
-  },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
-  ],
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fixby/vnem-cli.git"
-  },
-  "author": "fixby",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fixby/vnem-cli/issues"
-  },
-  "homepage": "https://github.com/fixby/vnem-cli#readme"
+    "name": "vnem-cli",
+    "description": "Vue2.0,NodeJS,Express,MongoDB 框架脚手架",
+    "version": "1.0.1",
+    "keywords": [
+        "Vue2.0",
+        "NodeJS",
+        "Express",
+        "MongoDB"
+    ],
+    "files": [
+        "lib",
+        "bin"
+    ],
+    "bin": {
+        "vnem": "./bin/vnem.js"
+    },
+    "dependencies": {
+        "child_process": "^1.0.2",
+        "colors": "^1.1.2",
+        "ejs": "^2.5.5",
+        "fs": "0.0.1-security",
+        "inquirer": "^2.0.0",
+        "mongoose": "^4.7.5",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {},
+    "scripts": {},
+    "engine-strict": true,
+    "engines": {
+        "node": ">= 0.12"
+    },
+    "licenses": [{
+        "type": "MIT"
+    }],
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fixby/vnem-cli.git"
+    },
+    "author": "fixby",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/fixby/vnem-cli/issues"
+    },
+    "homepage": "https://github.com/fixby/vnem-cli#readme"
 }
