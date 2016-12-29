@@ -24,15 +24,16 @@ switch (command) {
         {
             return dbconfig();
         }
-    case "gener":
+    case "create":
         {
             return create();
         }
+    case "help":
     default:
         {
             console.log("1.init [project name]".green, " 初始化项目[project name](项目名称),不填默认为vnem\n".white);
-            console.log("2.dbconn".green, " mysql数据库配置\n".white);
-            console.log("3.gener tablename".green, " 生成代码 tablename必须参数".white);
+            console.log("2.dbconfig".green, " mongodb数据库配置\n".white);
+            console.log("3.create moudle".green, " 生成代码 moudle为必须参数".white);
         }
 }
 process.exit(0);
@@ -47,15 +48,14 @@ function init() {
 
     console.log("正在下载依赖支持包,请稍候...".green);
     if (process.platform == "win32") {
-        ret = exec("cd ".concat(param, " & npm i"));
-    } else if (process.platform == "linux") {
-        ret = exec("cd ".concat(param, " ; npm i"));
+        ret = exec("cd ".concat(param, " & npm istall"));
+    } else if (process.platform == "linux" || process.platform == "darwin") {
+        ret = exec("cd ".concat(param, " ; npm install"));
     }
-
     console.log("下载完成\n".green, ret.toString().white);
 }
 
-function dbconn() {
+function dbconfig() {
     let questions = [{
         type: "Input",
         name: "host",
@@ -84,51 +84,30 @@ function dbconn() {
     }];
 
     inquirer.prompt(questions).then(answers => {
-
-        const connect = () => {
-            const dbHost = 'mongodb://localhost:27017/nodeblog';
-            mongoose.connect(dbHost);
-            const db = mongoose.connection;
-            db.on('error', function() {
-                console.log('Database connection error.');
-            });
-            db.once('open', function() {
-                console.log('The Database has connected.')
-            });
-        }
-
-        //测试连接
-        var connection = mysql.createConnection({
-            host: answers.host,
-            port: answers.port,
-            user: answers.username,
-            password: answers.password,
-            database: answers.database
+        const dbHost = 'mongodb://' + answers.username + ((answers.username || answers.password) ? ':' : '') + answers.password + ((answers.username || answers.password) ? '@' : '') + answers.host + ':' + answers.port + '/' + answers.database;
+        mongoose.connect(dbHost);
+        const db = mongoose.connection;
+        db.on('error', function(err) {
+            console.log('数据连接库测试失败' + err);
         });
+        db.once('open', function() {
+            let config = fs.readFileSync(path.join(cwdPath, "/config.json"));
+            fs.writeFileSync(path.join(cwdPath, "/config.json"), ejs.render(config.toString(), { mongobd: answers }));
+            console.log("数据库测试成功\n".green, db.name);
+            process.exit(0);
 
-        connection.connect(function(err) {
-            if (err) {
-                return console.log(err.stack.red);
-            }
-
-            connection.query("show tables", function(err, data) {
-                if (err) {
-                    return console.log(err.stack.red);
-                }
-                let config = fs.readFileSync(path.join(cwdPath, "/config.json"));
-                fs.writeFileSync(path.join(cwdPath, "/config.json"), ejs.render(config.toString(), { mongobd: answers }));
-                console.log("数据库测试成功\n".green, data);
-                process.exit(0);
-            });
         });
     });
 }
 
-function gener() {
-    let table = process.argv[3];
-    if (!table) {
+
+
+
+function create() {
+    let moudle = process.argv[3];
+    if (!moudle) {
         return console.log("请输入模块名称".red);
     }
-    let ret = exec("node ".concat(path.join(cwdPath, "generate/generate "), table));
+    let ret = exec("node ".concat(path.join(cwdPath, "server/generate/generate "), moudle));
     console.log(ret.toString().white);
 }
